@@ -1,0 +1,19 @@
+<p>poke-list works!</p>
+
+<p>{{ pokemons[0].name }}</p>
+
+dzfgh--
+<p *ngIf="false" [innerHtml]="pokemons[0].name"></p>
+dzfgh--
+
+<ng-container *ngFor="let pokemon of pokemons; let i = index;">
+  <div >
+    <b>{{ pokemon.name }}</b>
+    <app-poke-item
+      [pokemon]="pokemon"
+      [class.odd]="i % 2 === 1"
+      (cartAdded)="onCartAdded($event)">
+    </app-poke-item>
+  </div>
+</ng-container>
+
