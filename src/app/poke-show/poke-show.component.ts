@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Form } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from '../models/pokemon';
 import { PokemonApiService } from '../pokemon-api.service';
@@ -9,6 +10,16 @@ import { PokemonApiService } from '../pokemon-api.service';
   styleUrls: ['./poke-show.component.scss']
 })
 export class PokeShowComponent implements OnInit {
+
+  @ViewChild('myform')
+  public myform ?:Form;
+
+  public model = {
+    comment: "",
+    names: [
+      { name: "" }
+    ]
+  };
 
   public pokemon ?: Pokemon;
 
@@ -22,6 +33,18 @@ export class PokeShowComponent implements OnInit {
       .subscribe(response => {
         this.pokemon = response;
       });
+  }
+
+  submit() {
+    console.log(this.myform);
+  }
+
+  addName() {
+    this.model.names.push({ name: "" });
+  }
+
+  removeName(index: number) {
+    this.model.names.splice(index, 1);
   }
 
 }

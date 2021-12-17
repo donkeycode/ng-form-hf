@@ -2,4 +2,30 @@
   <div [innerHtml]="pokemon | pokeImage"></div>
 
   <h1>{{ pokemon.name }}</h1>
+
+  <form #myform (submit)="submit()">
+    <div>
+      <label for="comment">Commentaire</label>
+      <textarea
+        name="comment"
+        id="comment"
+        #commentInput="ngModel"
+        [(ngModel)]="model.comment"
+        required minlength="10" maxlength="20">
+      </textarea>
+
+      <div *ngFor="let entry of model.names; let i = index">
+        <label [for]="'name_' + i ">Name {{ i }}</label>
+        <input [name]="'name_' + i " [id]="'name_' + i " [(ngModel)]="model.names[i].name">
+        <input type="button" value="Remove name" (click)="removeName(i)" />
+      </div>
+
+      <input type="button" value="Add name" (click)="addName()" />
+    </div>
+
+    <input type="submit" value="Envoyer" />
+  </form>
+
+  {{ model | json }}
+  {{ commentInput | console:"At row 30" }}
 </div>

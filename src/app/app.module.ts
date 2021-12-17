@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { PokeShowComponent } from './poke-show/poke-show.component';
 import { PokeActionsComponent } from './poke-actions/poke-actions.component';
 import { PokeIdPipe } from './poke-id.pipe';
+import { FormsModule } from '@angular/forms';
+import { ConsolePipe } from './console.pipe';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { PokeIdPipe } from './poke-id.pipe';
     HomeComponent,
     PokeShowComponent,
     PokeActionsComponent,
-    PokeIdPipe
+    PokeIdPipe,
+    ConsolePipe
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

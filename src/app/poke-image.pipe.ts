@@ -10,8 +10,8 @@ export class PokeImagePipe implements PipeTransform {
 
   constructor(private pokeIdPipe: PokeIdPipe) {}
 
-  transform(value: Pokemon): string {
-    return `<img src="${environment.pokemonImageUrl.replace('{0}', this.pokeIdPipe.transform(value).padStart(3, '0') )}" />`;
+  transform(pokemon: Pokemon): string {
+    return `<img src="${environment.pokemonImageUrl.replace('{0}', this.pokeIdPipe.transform(pokemon).padStart(3, '0') )}" />`;
   }
 
 }
