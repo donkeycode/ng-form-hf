@@ -1,11 +1,15 @@
 <app-card>
   <ng-container title>
     <h2>{{ pokemon.name }}</h2>
+    {{ pokemon.url }}
+    <div [innerHTML]="pokemon | pokeImage"></div>
   </ng-container>
 
   <ng-container actions>
     <button type="button" (click)="addToCart()">Ajouter au panier</button>
+    <a [routerLink]="[ '/pokemons/', pokemon | pokeId ]">Voir {{ pokemon.name }}</a>
   </ng-container>
+
 </app-card>
 
 

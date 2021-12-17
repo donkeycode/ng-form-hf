@@ -2,12 +2,15 @@
 
 <app-card>
   <ng-container title>
-    <h2>Bienvenu sur mon pokedex</h2>
+    <h2 appColor>Bienvenu sur mon pokedex</h2>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur facere pariatur officiis voluptatibus perspiciatis est iusto doloribus maxime nostrum porro praesentium, excepturi possimus deleniti omnis ipsam, expedita officia tenetur accusantium!</p>
   </ng-container>
 </app-card>
 
-<app-poke-list></app-poke-list>
+<a [routerLink]="[ '/' ]">Home</a>
+<a [routerLink]="[ '/pokemons' ]" [queryParams]="{debug: true}">Liste pokemons</a>
+
+<router-outlet></router-outlet>
 
 <!--
   <app-alert message="str"></app-alert>
@@ -15,4 +18,81 @@
   <app-errors [errors]="form.errors"></app-errors>
   <app-alert>{{ pokemon?.name }} deleted</app-alert>
   <app-alert [message]="pokemon?.name + ' deleted'"></app-alert>
+
+
+<edit-page>
+  <title>Modification de {{ pokemon.name }}</title>
+
+  <edit-rest-form [model]="pokemon" (afterApi)="afterApi()">
+    <field model="name" />
+    <choice-field model="type" />
+    <field model="name" />
+  </edit-rest-form>
+
+
+</edit-page>
+
+<div class="edit-page">
+  <div class="wrapper">
+    <div class="title">
+      <h1>Modification de {{ pokemon.name }}</h1>
+    <div>
+
+    <div class="content">
+      <form>
+        <div class="pull-right"><button></button></div>
+
+        <app-form-field label="Name" [errors]="form.errors" errorKey="name">
+          <input type="text" [(ngModel)]="pokemon.name" />
+        </app-form-field>
+
+        <app-form-field label="Name" [errors]="form.errors" errorKey="name">
+          <div class="row">
+            <label for="name">Name</label>
+            <...>
+            <input type="text" [(ngModel)]="pokemon.name" />
+          </div>
+        </app-form-field>
+        ...
+
+        <div class="pull-right"><button></button></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<app-form-field label="Name" [errors]="form.errors" errorKey="name">
+  <input type="text" [(ngModel)]="pokemon.name" />
+</app-form-field>
+app-form-field.html
+
+<div class="row">
+  <label for="name">{{ label }}</label>
+
+  <div *ngFor="let error of form.erros[errorKey]">
+    {{ error }}
+  </div>
+
+  <ng-content></ng-content>
+</div>
+
+
+<div class="tabs">
+  <ul>
+    <li [class.active]="tabActive == 1" (click)="tabActive = 1"><a>Tab 1</a></li>
+    <li [class.active]="tabActive == 2" (click)="tabActive = 2"><a>Tab 2</a></li>
+  </ul>
+  <div class="tabs-content">
+    <div *ngIf="tabActive == 1" id="tab1">./....<div>
+    <div *ngIf="tabActive == 2" id="tab2">./....<div>
+  </div>
+</div>
+
+
+<tabs>
+  <tab title="hello" tooltip="ici">Ici</tab>
+  <tab title="hello">Ici</tab>
+</tabs>
 -->
+

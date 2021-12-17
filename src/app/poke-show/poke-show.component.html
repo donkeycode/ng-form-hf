@@ -1,0 +1,5 @@
+<div *ngIf="pokemon">
+  <div [innerHtml]="pokemon | pokeImage"></div>
+
+  <h1>{{ pokemon.name }}</h1>
+</div>

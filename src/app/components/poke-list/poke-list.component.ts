@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon';
+import { PokemonApiService } from 'src/app/pokemon-api.service';
 import { PokeItemComponent } from '../poke-item/poke-item.component';
 
 @Component({
@@ -7,7 +8,7 @@ import { PokeItemComponent } from '../poke-item/poke-item.component';
   templateUrl: './poke-list.component.html',
   styleUrls: ['./poke-list.component.scss']
 })
-export class PokeListComponent {
+export class PokeListComponent implements OnInit {
 
   public cart: { [key:string]: number } = {};
 
@@ -16,12 +17,18 @@ export class PokeListComponent {
 
   public pokemons :Pokemon[] = [
     {
-      name: 'Ratata'
-    },
-    {
-      name: 'Bulbizar'
+      name: 'Ratata',
+      url: 'string'
     }
   ];
+
+  constructor(private pokemonApi : PokemonApiService) {}
+
+  ngOnInit() {
+    this.pokemonApi.getPokemons().subscribe(response => {
+      this.pokemons = response.results;
+    });
+  }
 
   onClick() {
     console.log(this.item);
